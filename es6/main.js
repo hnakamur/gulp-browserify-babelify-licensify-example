@@ -1,5 +1,5 @@
-let message = require('message');
+import buildMessage from './message';
 
 let foo = 'world';
 let el = document.getElementById('content');
-el.textContent = message.buildMessage(foo);
+el.textContent = buildMessage(foo);
