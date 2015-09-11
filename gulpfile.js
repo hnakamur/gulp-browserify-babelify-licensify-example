@@ -14,7 +14,14 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
+var path = require('path');
 var _ = require('lodash');
+
+var config = {
+  srcFile: './src/es6/main.js',
+  destDir: 'js',
+  destFile: 'bundle.js'
+};
 
 gulp.task('build', function () {
   bundle(false);
@@ -27,7 +34,7 @@ function bundle(watch) {
   var bro;
 
   if (watch) {
-    bro = watchify(browserify('./src/es6/main.js',
+    bro = watchify(browserify(config.srcFile,
       // Assigning debug to have sourcemaps
       _.assign(watchify.args, {
         debug: true
@@ -38,7 +45,7 @@ function bundle(watch) {
       rebundle(bro);
     });
   } else {
-    bro = browserify('./src/es6/main.js', {
+    bro = browserify(config.srcFile, {
       debug: true
     });
   }
@@ -54,12 +61,12 @@ function bundle(watch) {
       .on('error', function(e) {
         gutil.log('Browserify Error', e);
       })
-      .pipe(source('main.js'))
+      .pipe(source(path.basename(config.srcFile)))
       .pipe(buffer())
-      .pipe(rename('bundle.js'))
+      .pipe(rename(config.destFile))
       .pipe(sourcemaps.init({loadMaps: true}))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('js'))
+      .pipe(gulp.dest(config.destDir))
       .pipe(gulpif(watch,
         browserSync.reload({
           stream: true,
