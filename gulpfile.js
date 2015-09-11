@@ -7,6 +7,7 @@ var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var watchify = require('watchify');
 var browserify = require("browserify");
+var licensify = require('licensify');
 var babelify = require("babelify");
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
@@ -45,6 +46,8 @@ function bundle(watch) {
   bro.transform(babelify.configure({
     compact: false
   }));
+
+  bro.plugin(licensify);
 
   function rebundle(bundler) {
     return bundler.bundle()

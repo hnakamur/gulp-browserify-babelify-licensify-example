@@ -17,6 +17,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.6",
+    "licensify": "^2.0.0",
     "lodash": "^3.10.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
