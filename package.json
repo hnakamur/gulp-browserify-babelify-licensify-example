@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "default": "gulp default",
     "build": "gulp build",
     "watch": "gulp watch"
   },
@@ -12,6 +11,15 @@
   "license": "MIT",
   "devDependencies": {
     "babelify": "^6.3.0",
-    "browserify": "^11.0.1"
+    "browser-sync": "^2.9.3",
+    "browserify": "^11.0.1",
+    "gulp-if": "^1.2.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
+    "lodash": "^3.10.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
   }
 }
