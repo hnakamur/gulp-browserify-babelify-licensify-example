@@ -24,20 +24,20 @@ var config = {
 };
 
 gulp.task('build', function () {
-  bundle(false);
+  bundle(false, false);
 });
 gulp.task('watch', function(){
-  bundle(true);
+  bundle(true, true);
 });
 
-function bundle(watch) {
+function bundle(watch, debug) {
   var bro;
 
   if (watch) {
     bro = watchify(browserify(config.srcFile,
       // Assigning debug to have sourcemaps
       _.assign(watchify.args, {
-        debug: true
+        debug: debug
       })
     ));
     bro.on('update', function() {
@@ -46,7 +46,7 @@ function bundle(watch) {
     });
   } else {
     bro = browserify(config.srcFile, {
-      debug: true
+      debug: debug
     });
   }
 
@@ -54,18 +54,30 @@ function bundle(watch) {
     compact: false
   }));
 
-  bro.plugin(licensify);
+  if (!debug) {
+    bro.transform({
+      global: true
+    }, 'uglifyify');
+
+    bro.plugin(licensify);
+  }
 
   function rebundle(bundler) {
-    return bundler.bundle()
+    bundler = bundler.bundle()
       .on('error', function(e) {
         gutil.log('Browserify Error', e);
       })
       .pipe(source(path.basename(config.srcFile)))
       .pipe(buffer())
-      .pipe(rename(config.destFile))
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sourcemaps.write())
+      .pipe(rename(config.destFile));
+
+    if (debug) {
+      bundler = bundler
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write());
+    }
+
+    return bundler
       .pipe(gulp.dest(config.destDir))
       .pipe(gulpif(watch,
         browserSync.reload({
