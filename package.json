@@ -1,0 +1,19 @@
+{
+  "name": "hello_babel",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1"
+  },
+  "scripts": {
+    "watch": "gulp watch"
+  }
+}
