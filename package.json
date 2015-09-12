@@ -1,13 +1,13 @@
 {
-  "name": "hello_babel",
+  "name": "gulp-browserify-babelify-licensify-example",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "An example using bulp, browserify, babelify and licensify",
+  "main": "src/es6/main.js",
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch"
   },
-  "author": "",
+  "author": "Hiroaki Nakamura",
   "license": "MIT",
   "devDependencies": {
     "babelify": "^6.3.0",
