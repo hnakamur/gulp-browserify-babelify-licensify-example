@@ -1,7 +1,7 @@
 gulp-browserify-babelify-licensify-example
 ==========================================
 
-An example using bulp, browserify, babelify and licensify
+An example using gulp, browserify, babelify and licensify
 
 ## Usage
 
